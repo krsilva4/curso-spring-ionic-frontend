@@ -1,3 +1,15 @@
 page-home {
-
+    
+    /*Aliando titulo do texto na tela */
+    h3 {
+        text-align: center;
+    }
+   /*Definindo tamanho e centralizando imagem */
+    img {
+        width: 200px;
+        align-self: center;
+        margin: auto;
+        display: block;
+        padding: 10px;
+    }
 }
