@@ -4,6 +4,9 @@ import { API_CONFIG } from "../../config/api.config";
 import { CategoriaDTO } from "../../models/categoria.dto";
 import { Observable } from "rxjs/Rx";
 
+/**
+ * Classe responsavel por conectar na api e recuperar dados.
+ */
 @Injectable()
 export class CategoriaService {
 
