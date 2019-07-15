@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
 import { CredenciaisDTO } from '../../models/credencias.dto';
+import { AuthService } from '../../services/auth.service';
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -14,17 +15,28 @@ export class HomePage {
     senha: ""
   };
 
-  constructor(public navCtrl: NavController, public menu: MenuController) {
+  constructor(public navCtrl: NavController,
+    public menu: MenuController,
+    public auth: AuthService) {
 
   }
+
+  //Metodo responsavel, pegar dados da tela e em seguinda realizar validacao
   login() {
-    console.log(this.creds);
-    this.navCtrl.setRoot('CategoriasPage');
+    this.auth.authenticate(this.creds)
+      .subscribe(Response => {
+        console.log(Response.headers.get('Authorization'))
+        this.navCtrl.setRoot('CategoriasPage');
+      },
+        error => { });
+
   }
   ionViewWillEnter() {
+    //desabilitar menu
     this.menu.swipeEnable(false);
   }
   ionViewDidLeave() {
+    //habilitar menu
     this.menu.swipeEnable(true);
   }
 
