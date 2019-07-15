@@ -18,25 +18,23 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class CategoriasPage {
 
-  bucketUrl: string = API_CONFIG.bucketBaseUrl; 
+  bucketUrl: string = API_CONFIG.bucketBaseUrl;
   items: CategoriaDTO[];
   constructor(
     public navCtrl: NavController,
-     public navParams: NavParams,
-     public categoriaService: CategoriaService) {
+    public navParams: NavParams,
+    public categoriaService: CategoriaService) {
   }
-/**
- * Metodo responsavel por inicializacao da pagina logo quando entrar.
- */
+  /**
+   * Metodo responsavel por inicializacao da pagina logo quando entrar.
+   */
   ionViewDidLoad() {
     //Comando ultilizado para acessar o servico e recupera dados da API.
     this.categoriaService.findAll()
-    .subscribe(response => {
-      this.items = response;
-    },
-    error => {
-      console.log(error)
-    });
+      .subscribe(response => {
+        this.items = response;
+      },
+        error => {});
   }
 
 }
