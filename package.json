@@ -5,16 +5,11 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "start": "node server.js",
-	"postinstall": "ng build --aot --prod",
+    "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint"
   },
-   "engines": {
-   "node": "10.16.0",
-   "npm": "6.9.0"
- },
   "dependencies": {
     "@angular/animations": "5.2.11",
     "@angular/common": "5.2.11",
