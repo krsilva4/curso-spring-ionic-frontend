@@ -36,22 +36,14 @@ export class ProfilePage {
         .subscribe(response => {
           this.cliente = response;
           // this.urlTest = API_CONFIG.bucketBaseUrl+'cp'+this.cliente.id+'.jpg';
-          this.getImageIfExists();
           this.getEscolherImagem();
         },
           error => { });
     }
   }
-  getImageIfExists() {
-    this.clienteService.getImageFromBucket(this.cliente.id)
-      .subscribe(response => {
-        this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;
-        console.log(this.cliente.imageUrl);
-      },
-        error => { });
-  }
+ 
   getEscolherImagem(){
-    if (this.cliente.imageUrl == "") {
+    if (this.cliente.id == "") {
       this.cliente.imageUrl = "assets/imgs/avatar-blank.png";
 
     } else {
