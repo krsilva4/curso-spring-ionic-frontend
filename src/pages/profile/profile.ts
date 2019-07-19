@@ -20,7 +20,7 @@ import { API_CONFIG } from '../../config/api.config';
 export class ProfilePage {
 
   cliente: ClienteDTO;
-  
+
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -38,11 +38,17 @@ export class ProfilePage {
           // this.urlTest = API_CONFIG.bucketBaseUrl+'cp'+this.cliente.id+'.jpg';
           this.getEscolherImagem();
         },
-          error => { });
+          error => {
+            if (error.status == 403) {
+              this.navCtrl.setRoot('HomePage');
+            }
+          });
+    }else{
+      this.navCtrl.setRoot('HomePage');
     }
   }
- 
-  getEscolherImagem(){
+
+  getEscolherImagem() {
     if (this.cliente.id == "") {
       this.cliente.imageUrl = "assets/imgs/avatar-blank.png";
 
