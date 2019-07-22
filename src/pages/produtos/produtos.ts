@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { ProdutoDTO } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
 
-/**
- * Generated class for the ProdutosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-produtos',
@@ -31,5 +24,7 @@ export class ProdutosPage {
       },
         error => { })
   }
-
+  showDetail() {
+    this.navCtrl.push('ProdutoDetailPage');
+  }
 }
