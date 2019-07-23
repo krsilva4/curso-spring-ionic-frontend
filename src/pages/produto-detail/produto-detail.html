@@ -12,7 +12,7 @@
     <button navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
   </ion-fab>
   <ion-card>
-    <img class="circle" src="https://curso-spring-ionic-pe-recife.s3-sa-east-1.amazonaws.com/prod{{item?.id}}-small.jpg">
+    <img class="circle" src="https://curso-spring-ionic-pe-recife.s3-sa-east-1.amazonaws.com/prod{{item?.id}}.jpg">
     <ion-card-content>
       <ion-card-title>
         {{item?.nome}}
@@ -23,5 +23,5 @@
     </ion-card-content>
   </ion-card>
 
-  <button >Adicionar ao carrinho</button>
+  <button ion-button block outline (click)="addToCart(item)">Adicionar ao carrinho</button>
 </ion-content>
