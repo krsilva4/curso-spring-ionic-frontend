@@ -34,7 +34,7 @@ export class ProfilePage {
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email)
         .subscribe(response => {
-          this.cliente = response;
+          this.cliente = response as ClienteDTO;
           // this.urlTest = API_CONFIG.bucketBaseUrl+'cp'+this.cliente.id+'.jpg';
           this.getEscolherImagem();
         },
