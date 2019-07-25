@@ -4,6 +4,9 @@ import { StorageService } from '../../services/storage.service';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { API_CONFIG } from '../../config/api.config';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
+
 
 /**
  * Generated class for the ProfilePage page.
@@ -20,13 +23,21 @@ import { API_CONFIG } from '../../config/api.config';
 export class ProfilePage {
 
   cliente: ClienteDTO;
+  picture: string;
+  profileImage;
+  cameraOn: boolean = false;
+
 
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public storage: StorageService,
-    public clienteService: ClienteService) {
+    public clienteService: ClienteService,
+    private camera: Camera
+  ) {
   }
+
+
 
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
@@ -43,7 +54,7 @@ export class ProfilePage {
               this.navCtrl.setRoot('HomePage');
             }
           });
-    }else{
+    } else {
       this.navCtrl.setRoot('HomePage');
     }
   }
@@ -55,5 +66,25 @@ export class ProfilePage {
     } else {
       this.cliente.imageUrl = API_CONFIG.bucketBaseUrl + '/cp' + this.cliente.id + '.jpg';
     }
+  }
+
+   options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+  
+
+  getCameraPicture() {
+    this.camera.getPicture(this.options).then((imageData) => { 
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.picture = 'data:image/jpeg;base64,' + imageData;
+      this.cameraOn = false;
+    }, (err) => {
+      // Handle error
+    });
+
   }
 }
