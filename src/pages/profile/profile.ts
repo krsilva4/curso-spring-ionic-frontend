@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
@@ -24,6 +24,7 @@ export class ProfilePage {
 
   cliente: ClienteDTO;
   picture: string;
+  pictureAx: string = null;
   profileImage;
   cameraOn: boolean = false;
 
@@ -40,6 +41,10 @@ export class ProfilePage {
 
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     let localUser = this.storage.getLocalUser();
     //Consistindo se o localUser tem o campo email preenchido.
     if (localUser && localUser.email) {
@@ -58,7 +63,6 @@ export class ProfilePage {
       this.navCtrl.setRoot('HomePage');
     }
   }
-
   getEscolherImagem() {
     if (this.cliente.id == "") {
       this.cliente.imageUrl = "assets/imgs/avatar-blank.png";
@@ -68,23 +72,40 @@ export class ProfilePage {
     }
   }
 
-   options: CameraOptions = {
+  options: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
-    encodingType: this.camera.EncodingType.JPEG,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.PNG,
     mediaType: this.camera.MediaType.PICTURE
   }
-  
+
 
   getCameraPicture() {
-    this.camera.getPicture(this.options).then((imageData) => { 
+    this.camera.getPicture(this.options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
-      this.picture = 'data:image/jpeg;base64,' + imageData;
+      this.picture = 'data:image/png;base64,' + imageData;
       this.cameraOn = false;
     }, (err) => {
       // Handle error
     });
 
   }
+
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture)
+      .subscribe(response => {
+        this.pictureAx = this.picture;
+        this.picture = null;
+      },
+        error => {
+        });
+  }
+
+  cancel() {
+    this.picture = null;
+  }
+
+  
+ 
 }
