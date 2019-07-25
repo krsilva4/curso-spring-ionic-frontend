@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Correio</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form>
+    <ion-item>
+      <ion-label stacked>Cep</ion-label>
+      <ion-input [(ngModel)]="cepEntrada" name="cepEntrada" type="text"></ion-input>
+    </ion-item>
+
+    <button ion-button outline block (click)="buscarCep()">Pegar cpf</button>
+  </form>
+
+  <h2 text-center>{{cep?.cep}}</h2>
+  <h2 text-center>{{cep?.logradouro}}</h2>
+  <h2 text-center>{{cep?.complemento}}</h2>
+  <h2 text-center>{{cep?.localidade}}</h2>
+  <h2 text-center>{{cep?.uf}}</h2>
+  <h2 text-center>{{cep?.unidade}}</h2>
+  <h2 text-center>{{cep?.ibge}}</h2>
+  <h2 text-center>{{cep?.gia}}</h2>
+</ion-content>
