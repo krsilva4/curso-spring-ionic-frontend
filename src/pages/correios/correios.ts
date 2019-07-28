@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CepDTO } from '../../models/cep.dto ';
 import { CepService } from '../../services/domain/cep.service ';
-import { FormGroup, FormBuilder } from '@angular/forms';
 
 /**
  * Generated class for the CorreiosPage page.
